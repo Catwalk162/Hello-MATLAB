@@ -1,0 +1,37 @@
+close all; clear all; clc; % lenght and numel
+%%
+%     Curso do canal ExataMenteS
+%     Aula 15 - Autovalores e Autovetores de uma Matriz de Hankel
+%     Se inscreva no canal e nos ajude a crescer <3
+%     Vamos melhorar o Brasil atráves da tecnologia :)
+%     https://www.youtube.com/channel/UCZyFebN0_gF2yy5fhVhlXtA
+%     Instrutor: Joao Pinheiro
+%%
+m = abs(round(10 * randn(1)));
+
+a = randn(m,1);
+H = hankel(a, a([end 1: end - 1]));
+
+[P D] = eig(H); % H * P = P * D;
+
+[valores, num] = sort(diag(D), 'descend');
+
+P = P(:, num);
+%%
+
+% Plot dos Autovalores
+figure(1), clf
+subplot(141);
+plot(valores, 's-', 'markerfacecolor', 'b', 'linew', 2);
+ylabel('\lambda'), xlabel('Ordem');
+title('Espectro de \lambda');
+
+% Autovetores
+subplot(1,4,2:4)
+imagesc(P)
+title('\lambda Em Ordem pelos Autovetores')
+
+% Alguns Exemplos
+figure(2), clf
+plot(P(:, [8 12 7]),'linew',3)
+title('Alguns Autovetores')
