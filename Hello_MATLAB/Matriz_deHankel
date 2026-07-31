@@ -1,0 +1,51 @@
+close all; clear all; clc;
+%%
+%     Curso do canal ExataMenteS
+%     Aula 14 - Matriz de Hankel
+%     Se inscreva no canal e nos ajude a crescer <3
+%     Vamos melhorar o Brasil atráves da tecnologia :)
+%     https://www.youtube.com/channel/UCZyFebN0_gF2yy5fhVhlXtA
+%     Instrutor: Joao Pinheiro
+%%
+% Cadeias de Markov(Redes Neurais), processamento de sinais(frequência);
+m = abs(round(10 * randn(1)));
+
+a = randn(m,1);
+
+H0 = hankel(a, [a(end); a(1:end-1)]);
+
+dimensao = size(a, 1);
+
+H1 = zeros(dimensao);
+
+H1(:, 1) = a;
+H2 = H1;
+g = a;
+for i = 2:m 
+    mem0 = g(1, 1); % Salva o primeiro elemento na memória;
+    g(1:m-1) = g(2:m);    % Puxa todos os elementos (do 2º ao último) uma casa para cima % Elementos intermediários;
+    g(m, 1) = mem0; % O último elemento recebe o primeiro;
+    % Outra forma seria: g = circshift(g, -1); Substituindo tudo acima;
+    
+    H2(:, i) = g;
+end
+
+H0
+
+H2
+
+H0 == H2
+%%
+
+figure(1), clf
+subplot(151)
+imagesc(a);
+axis image,
+set(gca,'xtick',[],'ytick',[])
+title('a')
+
+subplot(1,5,2:5)
+imagesc(H2);
+axis image,
+set(gca,'xtick',[],'ytick',[])
+title('Hankel(a)')
