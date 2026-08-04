@@ -12,8 +12,6 @@ close all; clear all; clc; % shading, surf
 % Criando uma matriz 
 A = [round(10*randn(1)) round(10*randn(1)); round(10*randn(1)) round(10*randn(1))];
 
-Asim =(A + A') / 2;
-
 % Divisao em cada dimensao
 p = -10:1:10; % vetor de -10 a 10 com passo de 1;
 
