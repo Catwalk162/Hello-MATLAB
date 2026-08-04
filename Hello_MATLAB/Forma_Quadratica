@@ -1,0 +1,65 @@
+close all; clear all; clc; % shading, surf
+%%
+%     Curso do canal ExataMenteS
+%     Aula 16 - Forma Quadrática
+%     Se inscreva no canal e nos ajude a crescer <3
+%     Vamos melhorar o Brasil atráves da tecnologia :)
+%     https://www.youtube.com/channel/UCZyFebN0_gF2yy5fhVhlXtA
+%     Instrutor: Joao Pinheiro
+%%
+% Quad = a*M*a', M é uma matriz simétrica e a é um vetor de variáveis;
+
+% Criando uma matriz 
+A = [round(10*randn(1)) round(10*randn(1)); round(10*randn(1)) round(10*randn(1))];
+
+Asim =(A + A') / 2;
+
+% Divisao em cada dimensao
+p = -10:1:10; % vetor de -10 a 10 com passo de 1;
+
+% Definir a funcao como uma matriz nula
+Quad = zeros( length(p) );
+
+for i = 1:length(p)
+    
+    for j = 1:length(p)
+        
+        % Implemente o vetor 'a' e a funcao quadratica
+        a = [p(i) p(j)]';
+        
+        Quad(i, j) = a' * A * a;
+    end
+end
+
+% Definir a funcao como uma matriz nula
+QuadNorm = zeros( length(p) );
+
+% Loop entre os nossos pontos 'p'
+for i = 1:length(p)
+    
+    for j = 1:length(p)
+        
+        % Faca a mesma implementacao da funcao acima
+        % E divida pelo produto escalar do vetor 'a'
+        a = [p(i) p(j)]';
+        
+        QuadNorm(i, j) = (a' * A * a) / (a' * a);
+        
+    end
+end
+
+% Crie a superficie da funcao Quadratica
+figure(1), clf;
+surf(p, p, Quad); shading interp;               % use a funcao surf para plotar e shadding
+title('Forma Quadradica a partir de uma matriz 2x2');
+xlabel('a_1'), ylabel('a_2'), zlabel('Altura');
+rotate3d on, axis square;
+
+% % Crie a superficie da funcao Quadratica Normalizada
+figure(2), clf;
+surf(p, p, QuadNorm); shading interp;                % use a funcao surf para plotar e shadding
+title('Forma Quadradica Normalizada');
+xlabel('a_1'), ylabel('a_2'), zlabel('Altura');
+rotate3d on, axis square;
+
+%%
